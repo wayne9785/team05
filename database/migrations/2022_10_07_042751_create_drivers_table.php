@@ -16,7 +16,10 @@ class CreateDriversTable extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();           
             $table->string('name')->comment('車手');
-            $table->tinyInteger('tid')->unsigned()->comment('所屬車隊');
+            $table->foreignid('tid')->unsigned()->comment('所屬車隊');
+            $table->foreign('tid')
+                 ->references('id')->on('teams')
+                 ->onDelete('cascade');
             $table->integer('number')->unsigned()->comment('車號');
             $table->integer('frequency')->unsigned()->comment('出賽次數');
             $table->double('integral')->unsigned()->comment('生涯積分');

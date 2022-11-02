@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DriversController;
+use App\Http\Controllers\FleetsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('drivers', [DriversController::class, 'index'])->name('drivers.index');
+Route::get('drivers/{id}', [DriversController::class, 'show'])->where('id', '[0-9]+')->name('drivers.show');
+Route::get('drivers/delete/{id}', [DriversController::class, 'destroy'])->where('id', '[0-9]+')->name('drivers.destroy');
+Route::get('fleets', [FleetsController::class, 'index'])->name('fleets.index');
