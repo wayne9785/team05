@@ -38,7 +38,7 @@ class DriversTableSeeder extends Seeder
     }
     public function run()
     {
-        for ($i=0; $i<22; $i++)
+        for ($i=0; $i<30; $i++)
         {
             $name = $this->generateRandomName();
             $countryofbirth = $this->generateRandomcountryofbirth();
