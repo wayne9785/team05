@@ -22,5 +22,11 @@
     </head>
     <body class="antialiased">
         顯示單一車隊的視圖(view)
+        <table>
+            <tr>
+                <td>所在地</td>
+                <td>{{ $fleets->location}}</td>
+            </tr>
+        </table>
     </body>
 </html>

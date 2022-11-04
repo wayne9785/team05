@@ -14,5 +14,16 @@ class FleetsController extends Controller
         return view('fleets.index', ['fleets' => $fleets]);
        
     }
+    public function show($id)
+    {
+        $fleets = Fleet::findOrFail($id);
+        return view('fleets.show', ['fleets' => $fleets]);
+    }
+    public function destroy($id)
+    {
+        $fleet = Fleet::findOrFail($id);
+        $fleet->delete();
+        return redirect('fleets');
+    }
 }
 
