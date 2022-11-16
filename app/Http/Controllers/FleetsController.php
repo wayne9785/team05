@@ -25,5 +25,9 @@ class FleetsController extends Controller
         $fleet->delete();
         return redirect('fleets');
     }
+    public function create()
+    {
+        return view('fleets.create');
+    }
 }
 

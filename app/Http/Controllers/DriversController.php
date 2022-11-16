@@ -24,5 +24,8 @@ class DriversController extends Controller
         $driver->delete();
         return redirect('drivers');
     }
-    
+    public function create()
+    {
+        return view('drivers.create');
+    }
 }
