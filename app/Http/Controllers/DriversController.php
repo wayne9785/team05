@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DriversController extends Controller
 {
@@ -26,6 +27,16 @@ class DriversController extends Controller
     }
     public function create()
     {
-        return view('drivers.create');
+       $fleets = DB::table('fleets')
+            ->select('fleets.id', 'fleets.name')
+            ->orderBy('fleets.id', 'asc')
+            ->get();
+            
+        $data = [];
+        foreach ($fleets as $fleet)
+        {
+            $data[$fleet->id] = $fleet->name;
+        }
+        return view('drivers.create',['fleets' =>$data]);
     }
 }

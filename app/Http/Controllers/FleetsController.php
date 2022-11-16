@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fleet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FleetsController extends Controller
 {
