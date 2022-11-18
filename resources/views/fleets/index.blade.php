@@ -5,6 +5,9 @@
 @section('f1_theme', 'F1 車隊')
 
 @section('f1_contents')
+    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        <a href="{{ route('fleets.create') }} ">新增車隊</a>        
+    </div>
     <table>
         <tr>
             <th>車對編號</th>

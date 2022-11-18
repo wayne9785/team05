@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
+    public function fleet()
+    {
+        return $this->belongsTo('App\Models\Fleet','tid', 'id');
+    }
 }
