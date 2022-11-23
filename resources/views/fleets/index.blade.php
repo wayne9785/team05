@@ -23,6 +23,13 @@
                 <td>{{ $fleet->country }}</td>
                 <td><a href="{{ route('fleets.show', ['id'=>$fleet->id]) }}">詳細資料</a></td>
                 <td><a href="{{ route('fleets.destroy', ['id'=>$fleet->id]) }}">刪除資料</a></td>
+                <td>
+                        <form action="{{ url('/fleets/delete', ['id' => $fleet->id]) }}" method="post">
+                            <input class="btn btn-default" type="submit" value="刪除" />
+                            @method('delete')
+                            @csrf
+                        </form>
+                    </td>
             </tr>
         @endforeach
     </table>
