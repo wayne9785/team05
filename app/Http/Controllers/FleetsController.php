@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fleet;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Request;
 
 class FleetsController extends Controller
 {
+    public function store()
+    {
+        $input = Request::all();
+        Fleet::create($input);
+        return redirect('fleets');       
+    }
     public function index()
     {
         
@@ -18,7 +25,8 @@ class FleetsController extends Controller
     public function show($id)
     {
         $fleets = Fleet::findOrFail($id);
-        return view('fleets.show', ['fleets' => $fleets]);
+        $drivers = $fleets->drivers;
+        return view('fleets.show', ['fleets' => $fleets, 'drivers'=>$drivers]);
     }
     public function destroy($id)
     {

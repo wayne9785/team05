@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Fleet extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'name',
+        'country',
+        'location',
+        'created_at',
+        'updated_at',
+    ];
     public function drivers()
     {
         return $this->hasMany('App\Models\Driver', 'tid');

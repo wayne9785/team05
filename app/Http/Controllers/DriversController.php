@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 use App\Models\Driver;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Request;
 
 class DriversController extends Controller
 {
+    public function store()
+    {
+        $input = Request::all();
+        Driver::create($input);
+        return redirect('drivers');       
+    }
     public function index()
     {
         

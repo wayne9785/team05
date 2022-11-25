@@ -26,7 +26,7 @@
                 <td>{{ $driver->number }}</td>
                 <td>{{ $driver->countryofbirth }}</td>
                 <td><a href="{{ route('drivers.show', ['id'=>$driver->id]) }}">詳細資料</a></td>
-                <td><a href="{{ route('drivers.destroy', ['id'=>$driver->id]) }}">刪除資料</a></td>
+               
                 <td>
                     <form action="{{ url('/drivers/delete', ['id' => $driver->id]) }}" method="post">
                         <input class="btn btn-default" type="submit" value="刪除" />
