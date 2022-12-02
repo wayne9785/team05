@@ -44,6 +44,6 @@ class DriversController extends Controller
       $driver = Driver::findOrFail($id);
       $tags = Fleet::orderBy('fleets.id','asc')->pluck('fleets.name','fleets.id');
       $selectedTag = $driver->tid;
-      return view('drivers.edit',['driver'=>$driver, 'fleet' =>$tags, 'selectedTid'=>$selectedTag]);
+      return view('drivers.edit',['driver'=>$driver, 'fleets' =>$tags, 'selectedTid'=>$selectedTag]);
     }
 }
