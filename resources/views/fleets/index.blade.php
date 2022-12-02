@@ -15,14 +15,15 @@
             <th>代表國家</th>
             <th>操作一</th>
             <th>操作二</th>
+            <th>操作三</th>
         </tr>
         @foreach($fleets as $fleet)
             <tr>
                 <td>{{ $fleet->id }}</td>
                 <td>{{ $fleet->name }}</td>
                 <td>{{ $fleet->country }}</td>
-                <td><a href="{{ route('fleets.show', ['id'=>$fleet->id]) }}">詳細資料</a></td>
-                
+                <td><a href="{{ route('fleets.show', ['id'=>$fleet->id]) }}">顯示</a></td>
+                <td><a href="{{ route('fleets.edit', ['id'=>$fleet->id]) }}">修改</a></td>
                 <td>
                         <form action="{{ url('/fleets/delete', ['id' => $fleet->id]) }}" method="post">
                             <input class="btn btn-default" type="submit" value="刪除" />

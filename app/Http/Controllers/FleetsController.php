@@ -38,5 +38,9 @@ class FleetsController extends Controller
     {
         return view('fleets.create');
     }
+    public function edit($id)
+    {
+        return view('fleets.edit');
+    }
 }
 

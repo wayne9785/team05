@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Driver;
+use App\Models\Fleet;
+
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Request;
@@ -34,16 +36,14 @@ class DriversController extends Controller
     }
     public function create()
     {
-       $fleets = DB::table('fleets')
-            ->select('fleets.id', 'fleets.name')
-            ->orderBy('fleets.id', 'asc')
-            ->get();
-            
-        $data = [];
-        foreach ($fleets as $fleet)
-        {
-            $data[$fleet->id] = $fleet->name;
-        }
-        return view('drivers.create',['fleets' =>$data]);
+       $tags = Fleet::orderBy('fleets.id', 'asc')->pluck('fleets.name','fleets.id');
+       return view('drivers.create',['fleets'=>$tags]);
+    }
+    public function edit($id)
+    {
+      $driver = Driver::findOrFail($id);
+      $tags = Fleet::orderBy('fleets.id','asc')->pluck('fleets.name','fleets.id');
+      $selectedTag = $driver->tid;
+      return view('drivers.edit',['driver'=>$driver, 'fleet' =>$tags, 'selectedTid'=>$selectedTag]);
     }
 }

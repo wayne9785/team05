@@ -17,6 +17,7 @@
             <th>出生國家</th>
             <th>操作一</th>
             <th>操作二</th>
+            <th>操作三</th>
         </tr>
         @foreach($drivers as $driver)
             <tr>
@@ -25,8 +26,8 @@
                 <td>{{ $driver->fleet->name }}</td>
                 <td>{{ $driver->number }}</td>
                 <td>{{ $driver->countryofbirth }}</td>
-                <td><a href="{{ route('drivers.show', ['id'=>$driver->id]) }}">詳細資料</a></td>
-               
+                <td><a href="{{ route('drivers.show', ['id'=>$driver->id]) }}">顯示</a></td>
+                <td><a href="{{ route('drivers.edit', ['id'=>$driver->id]) }}">修改</a></td>
                 <td>
                     <form action="{{ url('/drivers/delete', ['id' => $driver->id]) }}" method="post">
                         <input class="btn btn-default" type="submit" value="刪除" />
