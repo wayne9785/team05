@@ -46,4 +46,10 @@ class DriversController extends Controller
       $selectedTag = $driver->tid;
       return view('drivers.edit',['driver'=>$driver, 'fleets' =>$tags, 'selectedTid'=>$selectedTag]);
     }
+
+    public function update($id)
+    {
+        $driver = Driver::findOrFail($id);
+        
+    }
 }
