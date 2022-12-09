@@ -6,20 +6,34 @@ use App\Models\Fleet;
 
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Request;
+use App\Http\Requests\CreateDriverRequest;
 
 class DriversController extends Controller
 {
-    public function store()
+    public function store(CreateDriverRequest $request)
     {
-        $input = Request::all();
-        Driver::create($input);
+        $name = $request->input('name');
+        $tid = $request->input('tid');
+        $number = $request->input('number');
+        $frequency = $request->input('frequency');
+        $integal = $request->input('integal');
+        $birthday = $request->input('birthday');
+        $countryofbirth = $request->input('countryofbirth');
+
+        $driver = Driver::create([
+            'name'=>$name,
+            'tid'=>$tid,
+            'number'=>$number,
+            'frequency'=>$frequency,
+            'integal'=>$integal,
+            'birthday'=>$birthday,
+            'countryofbirth'=>$countryofbirth]);
         return redirect('drivers');       
     }
     public function index()
     {
         
-        $drivers = Driver::all();
+        $drivers = Driver::paginate(15);
         return view('drivers.index', ['drivers' => $drivers]);
        
     }
@@ -47,9 +61,21 @@ class DriversController extends Controller
       return view('drivers.edit',['driver'=>$driver, 'fleets' =>$tags, 'selectedTid'=>$selectedTag]);
     }
 
-    public function update($id)
+    public function update($id, CreateDriverRequest $request)
     {
         $driver = Driver::findOrFail($id);
         
+        
+
+        $driver->name = $request->input('name');
+        $driver->tid = $request->input('tid');
+        $driver->number = $request->input('number');
+        $driver->frequency = $request->input('frequency');
+        $driver->integal = $request->input('integal');
+        $driver->birthday = $request->input('birthday');
+        $driver->countryofbirth =$request->input('countryofbirth');
+        $driver->save();
+
+        return redirect('players');
     }
 }

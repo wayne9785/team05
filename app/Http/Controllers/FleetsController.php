@@ -45,5 +45,18 @@ class FleetsController extends Controller
       $selectedTag = $fleet->tid;
       return view('fleets.edit',['fleet'=>$fleet, 'drivers' =>$tags, 'selectedNid'=>$selectedTag]);
     }
+    public function update($id)    
+    {
+        $fleet = Fleet::findOrFail($id);
+
+        $input = Request::all();
+
+        $fleet->name = $input['name'];
+        $fleet->country = $input['country'];
+        $fleet->location = $input['location'];
+       
+        $fleet->save();
+        return redirect('teams');
+    }    
 }
 
