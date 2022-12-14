@@ -5,15 +5,26 @@ use App\Models\Driver;
 use App\Models\Fleet;
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Request;
+//use Request;
+use App\Http\Requests\CreateFleetRequest;
 
 class FleetsController extends Controller
 {
-    public function store()
+    public function store(CreateFleetRequest $request)
     {
-        $input = Request::all();
-        Fleet::create($input);
-        return redirect('fleets');       
+        $name = $request->input('name');
+        $country = $request->input('country');
+        $location = $request->input('location');
+       
+
+        Fleet::create([
+            'name' => $name,
+            'country' => $country,
+            'location' => $location,
+            
+        ]);
+
+        return redirect('fleets');  
     }
     public function index()
     {
@@ -45,15 +56,15 @@ class FleetsController extends Controller
       $selectedTag = $fleet->tid;
       return view('fleets.edit',['fleet'=>$fleet, 'drivers' =>$tags, 'selectedNid'=>$selectedTag]);
     }
-    public function update($id)    
+    public function update($id, CreateFleetRequest $request)    
     {
         $fleet = Fleet::findOrFail($id);
 
-        $input = Request::all();
 
-        $fleet->name = $input['name'];
-        $fleet->country = $input['country'];
-        $fleet->location = $input['location'];
+
+        $fleet->name = $request->input('name');
+        $fleet->country = $request->input('country');
+        $fleet->location = $request->input('location');
        
         $fleet->save();
         return redirect('teams');

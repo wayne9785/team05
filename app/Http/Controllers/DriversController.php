@@ -34,7 +34,14 @@ class DriversController extends Controller
     {
         
         $drivers = Driver::paginate(15);
-        return view('drivers.index', ['drivers' => $drivers]);
+        return view('drivers.index', ['drivers' => $drivers, 'showPagination'=>true]);
+       
+    }
+    public function senior()
+    {
+        
+        $drivers = Driver::senior()->get();
+        return view('drivers.index', ['drivers' => $drivers, 'showPagination'=>false]);
        
     }
     public function show($id)

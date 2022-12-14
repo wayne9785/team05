@@ -6,7 +6,8 @@
 
 @section('f1_contents')
     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-        <a href="{{ route('drivers.create') }} ">新增車手</a>        
+        <a href="{{ route('drivers.create') }} ">新增車手</a>
+        <a href="{{ route('drivers.senior') }} ">資深車手</a>        
     </div>
     <table>
         <tr>
@@ -38,5 +39,7 @@
             </tr>
         @endforeach
     </table>
-    {{$drivers->links()}}
+    @if ($showPagination)
+        {{$drivers->links()}}
+    @endif
 @endsection

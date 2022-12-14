@@ -10,4 +10,4 @@
    @include('fleets.form', ['submitButtonText'=>'更新車隊資料'])
    {!! Form::close() !!}
 
-@endsection`
+@endsection

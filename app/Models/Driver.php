@@ -24,4 +24,8 @@ class Driver extends Model
     {
         return $this->belongsTo('App\Models\Fleet','tid', 'id');
     }
+    public function scopeSenior($query)
+    {
+        $query->where('frequency', '>=', 100)->orderby('frequency');
+    }
 }
