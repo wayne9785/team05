@@ -7,7 +7,13 @@
 @section('f1_contents')
     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
         <a href="{{ route('drivers.create') }} ">新增車手</a>
-        <a href="{{ route('drivers.senior') }} ">資深車手</a>        
+        <a href="{{ route('drivers.senior') }} ">資深車手</a> 
+        <form action="{{ url('drivers/countryofbirth') }}" method='POST'>
+            {!! Form::label('pos', '選取國家:')!!}
+            {!! Form::select('pos', $countryofbirths, ['class' => 'form-control'])!!}       
+            <input class="btn btn-default" type="submit" value="查詢" />
+            @csrf
+        </form>   
     </div>
     <table>
         <tr>

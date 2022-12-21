@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Fleet;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateDriverRequest;
 
@@ -30,24 +30,39 @@ class DriversController extends Controller
             'countryofbirth'=>$countryofbirth]);
         return redirect('drivers');       
     }
+    public function countryofbirth(Request $request)
+    {
+        $drivers = Driver::countryofbirth($request->input('pos'))->get();
+
+        $countryofbirths = Driver::allCountryofbirths()->get();
+        $data = [];
+        foreach ($countryofbirths as $countryofbirth)
+        {
+            $data["$countryofbirth->countryofbirth"] = $countryofbirth->countryofbirth;
+        }
+        return view('drivers.index', ['drivers' => $drivers, 'countryofbirth'=>$data]);
+    }
     public function index()
     {
         
         $drivers = Driver::paginate(15);
-        return view('drivers.index', ['drivers' => $drivers, 'showPagination'=>true]);
+        $countryofbirths = Driver::allCountryofbirths()->pluck('drivers.countryofbirth', 'drivers.countryofbirth');
+        return view('drivers.index', ['drivers' => $drivers, 'countryofbirths'=>$countryofbirths, 'showPagination'=>true]);
        
     }
     public function senior()
     {
         
         $drivers = Driver::senior()->get();
-        return view('drivers.index', ['drivers' => $drivers, 'showPagination'=>false]);
+        $countryofbirths = Driver::allCountryofbirths()->pluck('drivers.countryofbirth', 'drivers.countryofbirth');
+        return view('drivers.index', ['drivers' => $drivers, 'countryofbirths'=>$countryofbirths, 'showPagination'=>false]);
        
     }
     public function show($id)
     {
         $driver = Driver::findOrFail($id);
-        return view('drivers.show', ['driver' => $driver]);
+        $countryofbirths = Driver::allCountryofbirths()->pluck('drivers.countryofbirth', 'drivers.countryofbirth');
+        return view('drivers.show', ['driver' => $driver, 'countryofbirths'=>$countryofbirths, 'showPagination' => false]);
     }
     public function destroy($id)
     {

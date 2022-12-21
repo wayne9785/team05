@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::get('drivers', [DriversController::class, 'index'])->name('drivers.index');
 route::get('drivers/senior', [DriversController::class, 'senior'])->name('drivers.senior');
+Route::post('drivers/countryofbirth', [DriversController::class, 'countryofbirth'])->name('drvers.countryofbirth');
 Route::get('drivers/{id}', [DriversController::class, 'show'])->where('id', '[0-9]+')->name('drivers.show');
 Route::get('drivers/create',[DriversController::class,'create'])->name('drivers.create');
 Route::get('drivers/{id}/edit', [DriversController::class, 'edit'])->where('id', '[0-9]+')->name('drivers.edit');

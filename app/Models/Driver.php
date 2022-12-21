@@ -28,4 +28,13 @@ class Driver extends Model
     {
         $query->where('frequency', '>=', 100)->orderby('frequency');
     }
+    public function scopeALLCountryofbirths($query)
+    {
+        $query->select('countryofbirth')->groupBy('countryofbirth');
+    }
+    public function scopeContryofbirth($query, $pos)
+    {
+        $query->where('countryofbirth', '=', $pos);
+            
+    }
 }
