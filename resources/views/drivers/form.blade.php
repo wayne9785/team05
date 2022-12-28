@@ -4,7 +4,7 @@
     <div>
     <div class="form-group">
             {!! Form::label('tid','所屬車隊')!!}
-            {!! Form::select('tid', $fleets, ['class' => 'form-control'])!!}
+            {!! Form::select('tid', $fleets, $selectedTid,['class' => 'form-control'])!!}
     <div>
     <div class="form-group">
             {!! Form::label('number','車號')!!}

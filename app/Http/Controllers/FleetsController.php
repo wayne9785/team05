@@ -51,10 +51,8 @@ class FleetsController extends Controller
     }
     public function edit($id)
     {
-      $fleet = Fleet::findOrFail($id);
-      $tags = Driver::orderBy('drivers.id','asc')->pluck('drivers.name','drivers.id');
-      $selectedTag = $fleet->tid;
-      return view('fleets.edit',['fleet'=>$fleet, 'drivers' =>$tags, 'selectedNid'=>$selectedTag]);
+      $fleet = Fleet::findOrFail($id);     
+      return view('fleets.edit',['fleet'=>$fleet]);
     }
     public function update($id, CreateFleetRequest $request)    
     {

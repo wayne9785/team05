@@ -32,16 +32,11 @@ class DriversController extends Controller
     }
     public function countryofbirth(Request $request)
     {
-        $drivers = Driver::countryofbirth($request->input('pos'))->get();
-
-        $countryofbirths = Driver::allCountryofbirths()->get();
-        $data = [];
-        foreach ($countryofbirths as $countryofbirth)
-        {
-            $data["$countryofbirth->countryofbirth"] = $countryofbirth->countryofbirth;
-        }
-        return view('drivers.index', ['drivers' => $drivers, 'countryofbirth'=>$data]);
+        $drivers = Driver::countryofbirth($request->input('pos'))->paginate(25); //->get();
+        $countryofbirths = Driver::allCountryofbirths()->pluck('drivers.countryofbirth', 'drivers.countryofbirth');
+        return view('drivers.index', ['drivers' => $drivers, 'countryofbirths'=>$countryofbirths, 'showPagination'=>true]);
     }
+    
     public function index()
     {
         
@@ -61,8 +56,7 @@ class DriversController extends Controller
     public function show($id)
     {
         $driver = Driver::findOrFail($id);
-        $countryofbirths = Driver::allCountryofbirths()->pluck('drivers.countryofbirth', 'drivers.countryofbirth');
-        return view('drivers.show', ['driver' => $driver, 'countryofbirths'=>$countryofbirths, 'showPagination' => false]);
+        return view('drivers.show', ['driver' => $driver]);
     }
     public function destroy($id)
     {

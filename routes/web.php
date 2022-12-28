@@ -27,7 +27,7 @@ Route::get('drivers/create',[DriversController::class,'create'])->name('drivers.
 Route::get('drivers/{id}/edit', [DriversController::class, 'edit'])->where('id', '[0-9]+')->name('drivers.edit');
 Route::post('drivers/store',[DriversController::class,'store'])->name('id','[0-9]+')->name('drivers.store');
 Route::delete('drivers/delete/{id}', [DriversController::class, 'destroy'])->where('id', '[0-9]+')->name('drivers.destroy');
-Route::patch('drivers/{id}/update', [DriversController::class, 'update'])->where('id', '[0-9]+')->name('drivers.update');
+Route::patch('drivers/{id}/update', [DriversController::class, 'update'])->where('id', '[0-9]+')->name('fleets.update');
 
 Route::get('fleets', [FleetsController::class, 'index'])->name('fleets.index');
 Route::get('fleets/{id}', [FleetsController::class, 'show'])->where('id', '[0-9]+')->name('fleets.show');

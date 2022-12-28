@@ -32,7 +32,7 @@ class Driver extends Model
     {
         $query->select('countryofbirth')->groupBy('countryofbirth');
     }
-    public function scopeContryofbirth($query, $pos)
+    public function scopeCountryofbirth($query, $pos)
     {
         $query->where('countryofbirth', '=', $pos);
             
