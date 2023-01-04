@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Fleet;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 //use Request;
 use App\Http\Requests\CreateFleetRequest;
@@ -32,6 +32,56 @@ class FleetsController extends Controller
         $fleets = Fleet::all();
         return view('fleets.index', ['fleets' => $fleets]);
        
+    }
+    public function api_fleets()
+    {
+        return Fleet::all();
+    }
+
+    public function api_update(Request $request)
+    {
+        $fleet = Fleet::find($request->input('id'));
+        if ($fleet == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+
+        $fleet->name = $request->input('name');
+        $fleet->country = $request->input('country');
+        $fleet->location = $request->input('location');
+        
+        if ($fleet->save())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+    }
+
+    public function api_delete(Request $request)
+    {
+        $fleet = Fleet::find($request->input('id'));
+
+        if ($fleet == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+
+        if ($fleet->delete())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        }
+
     }
     public function show($id)
     {
@@ -65,7 +115,7 @@ class FleetsController extends Controller
         $fleet->location = $request->input('location');
        
         $fleet->save();
-        return redirect('teams');
+        return redirect('fleets');
     }    
 }
 

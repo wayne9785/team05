@@ -45,6 +45,60 @@ class DriversController extends Controller
         return view('drivers.index', ['drivers' => $drivers, 'countryofbirths'=>$countryofbirths, 'showPagination'=>true]);
        
     }
+    
+    public function api_drivers()
+    {
+        return Driver::all();
+    }
+
+
+    public function api_update(Request $request)
+    {
+        $driver = Driver::find($request->input('id'));
+        if ($driver == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+        $driver->name = $request->input('name');
+        $driver->tid = $request->input('tid');
+        $driver->number = $request->input('number');
+        $driver->frequency = $request->input('frequency');
+        $driver->integral = $request->input('integral');
+        $driver->birthday = $request->input('birthday');
+        $driver->countryofbirth = $request->input('countryofbirth');
+
+        if ($driver->save())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+    }
+
+    public function api_delete(Request $request)
+    {
+        $driver = driver::find($request->input('id'));
+
+        if ($driver == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+
+        if ($driver->delete())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        }
+    }
     public function senior()
     {
         

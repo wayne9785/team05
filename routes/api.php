@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DriversController;
+use App\Http\Controllers\FleetsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +17,18 @@ use App\Http\Controllers\AuthController;
 */
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login',  [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    // 查詢所有球隊
+    Route::get('fleets', [FleetsController::class, 'api_fleets']);
+    // 修改指定球隊
+    Route::patch('fleets', [FleetsController::class, 'api_update']);
+    // 刪除指定球隊
+    Route::delete('fleets', [FleetsController::class, 'api_delete']);
+    // 查詢所有球員
+    Route::get('drivers', [DriversController::class, 'api_drivers']);
+    // 修改指定球員
+    Route::patch('drivers', [DriversController::class, 'api_update']);
+    // 刪除指定球員
+    Route::delete('drivers', [DriversController::class, 'api_delete']);
+
 });
