@@ -28,7 +28,7 @@ class CreateDriverRequest extends FormRequest
             'tid' => 'required',
             'number' => 'required',
             'frequency' => 'required',
-            'integal' => 'required',
+            'integral' => 'required',
             'birthday' => 'nullable',
             'countryofbirth' => 'required|string|min:2|max:191', // lt = less than, lg = larger than
             ];
@@ -41,7 +41,7 @@ class CreateDriverRequest extends FormRequest
             "tid.required" => "車隊編號 為必填",
             "number.required" => "車號 為必填",
             "frequency.required" => "出賽次數 為必填",
-            "integal.required" => "生涯積分 為必填",
+            "integral.required" => "生涯積分 為必填",
         ];
     }
 }

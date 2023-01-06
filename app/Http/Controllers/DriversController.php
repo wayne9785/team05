@@ -16,7 +16,7 @@ class DriversController extends Controller
         $tid = $request->input('tid');
         $number = $request->input('number');
         $frequency = $request->input('frequency');
-        $integal = $request->input('integal');
+        $integral = $request->input('integral');
         $birthday = $request->input('birthday');
         $countryofbirth = $request->input('countryofbirth');
 
@@ -25,7 +25,7 @@ class DriversController extends Controller
             'tid'=>$tid,
             'number'=>$number,
             'frequency'=>$frequency,
-            'integal'=>$integal,
+            'integral'=>$integral,
             'birthday'=>$birthday,
             'countryofbirth'=>$countryofbirth]);
         return redirect('drivers');       
@@ -121,7 +121,7 @@ class DriversController extends Controller
     public function create()
     {
        $tags = Fleet::orderBy('fleets.id', 'asc')->pluck('fleets.name','fleets.id');
-       return view('drivers.create',['fleets'=>$tags]);
+       return view('drivers.create',['driver'=>null, 'fleets' =>$tags, 'selectedTid'=>null]);
     }
     public function edit($id)
     {
@@ -141,7 +141,7 @@ class DriversController extends Controller
         $driver->tid = $request->input('tid');
         $driver->number = $request->input('number');
         $driver->frequency = $request->input('frequency');
-        $driver->integal = $request->input('integal');
+        $driver->integral = $request->input('integral');
         $driver->birthday = $request->input('birthday');
         $driver->countryofbirth =$request->input('countryofbirth');
         $driver->save();
